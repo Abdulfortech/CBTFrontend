@@ -1,0 +1,148 @@
+/**********************
+        Colours
+**********************/
+.text-default-1 {
+    color:#4154f1;
+}
+.text-default-2{
+    color: #012970;
+}
+.bg-default-1 {
+    background-color:#4154f1;
+}
+.bg-default-2{
+    background-color: #012970;
+}
+.bg-default-3{
+    background-color: #f6f9ff;
+}
+/**********************
+    Icon Container
+**********************/
+.icon-container{
+    width: 100px;
+    height: 100px;
+    padding: 20px;
+    border-radius: 100%;
+    background-color: #4154f1;
+}
+.icon-container i{
+    font-size: 50px;
+}
+
+/**********************
+    School Header
+**********************/
+.schoolHeader {
+    /* padding-bottom: 10px; */
+}
+
+.schoolHeader .school-logo{
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+}
+
+.schoolHeader .school-icon{
+    font-size:150px;
+}
+.schoolHeader .school-title {
+    font-size: 28px;
+    color: #012970;
+    font-weight: 900;
+    margin-bottom: 5px;
+    padding: 0;
+}
+
+.schoolHeader .school-motto {
+    font-size: 16px;
+    color: #3f81f3;
+    font-weight: 700;
+    margin-bottom: 3px;
+    padding: 0;
+}
+
+.schoolHeader .school-contact {
+    font-size: 16px;
+    color: #000;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+}
+
+.record-text{
+    font-size: 15px;
+}
+.record-text .label{
+    font-weight: 700;
+    color: rgba(1, 41, 112, 0.6);
+    margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+    .schoolHeader .school-logo{
+        width: 100px;
+        height: 100px;
+        border-radius: 100%;
+    }
+    .schoolHeader .school-icon {
+        font-size:100px;
+    }
+    .schoolHeader .school-title {
+        font-size: 17px;
+        font-weight: 1000;
+        margin-bottom: 3px;
+    }
+    
+    .schoolHeader .school-motto {
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 3px;
+        padding: 0;
+    }
+    
+    .schoolHeader .school-address {
+        font-size: 12px;
+        font-weight: 300;
+    }
+    
+  }
+  
+
+/**********************
+    Data Box
+**********************/
+
+.data-box {
+
+}
+
+.data-box li {
+    padding: 8px;
+    font-size: 15px;
+}
+
+
+.data-box li .label{
+    font-weight: 700;
+    color: rgba(1, 41, 112, 0.6);
+    margin-right: 10px;
+}
+
+
+@media (max-width: 768px) {
+    .data-box {
+        margin-bottom: 10px;
+    }
+    .data-box li {
+        padding: 5px;
+        font-size: 15px;
+    }
+
+    .data-box li .label{
+        font-weight: 700;
+        color: rgba(1, 41, 112, 0.6);
+        margin-right: 10px;
+    }
+
+}
