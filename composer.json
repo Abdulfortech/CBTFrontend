@@ -1,0 +1,17 @@
+{
+    "name": "abdulfortech/skul-sync-frontend",
+    "require": {
+        "twbs/bootstrap-icons": "^1.11"
+    },
+    "autoload": {
+        "psr-4": {
+            "Abdulfortech\\SkulSyncFrontend\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "abdulfortech",
+            "email": "ibnmudi@gmail.com"
+        }
+    ]
+}
