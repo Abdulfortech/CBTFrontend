@@ -1,11 +1,11 @@
 <?php
-$config = require __DIR__ . '/../../config/config.php';
-
+  $config = require __DIR__ . '/../../config/config.php';
+  session_start();
   $page = "School SignIn";
   $title = "School SignIn";
 ?>
   <!-- include head tags -->
- <?php include("../includes/head.php"); ?>
+ <?php include("../includes/auth-head.php"); ?>
 <body>
   <main>
     <div class="container">
@@ -31,14 +31,14 @@ $config = require __DIR__ . '/../../config/config.php';
                     <p class="text-center small">Enter your username & password to login</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate>
+                  <form action="../actions/authentication.php" method="POST" class="row g-3 needs-validation" novalidate>
 
                     <div class="col-12">
-                      <label for="yourUsername" class="form-label">Username</label>
+                      <label for="yourUsername" class="form-label">Email</label>
                       <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-person-fill"></i></span>
-                        <input type="text" name="username" class="form-control" id="username" placeholder="Username/Email" required>
-                        <div class="invalid-feedback">Please enter your username.</div>
+                        <input type="text" name="email" class="form-control" id="email" placeholder="Email Address" required>
+                        <div class="invalid-feedback">Please enter your email.</div>
                       </div>
                     </div>
 
@@ -58,7 +58,7 @@ $config = require __DIR__ . '/../../config/config.php';
                       <p class="small mb-0">Forget Password? <a href="./forget">Reset it</a></p>
                     </div>
                     <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">Login</button>
+                      <button class="btn btn-primary w-100" name="SignIn" type="submit">Login</button>
                     </div>
                     <div class="col-12">
                       <p class="small mb-0">Don't have account? <a href="./signup">Register Your School</a></p>
@@ -87,7 +87,7 @@ $config = require __DIR__ . '/../../config/config.php';
 
   
   <!-- include bottom tags and scrpts -->
- <?php include("../includes/head.php"); ?>
+ <?php include("../includes/auth-bottom.php"); ?>
 </body>
 
 </html>

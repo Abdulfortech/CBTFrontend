@@ -1,18 +1,19 @@
 <?php
-$config = require __DIR__ . '/../../config/config.php';
+    $config = require __DIR__ . '/../../config/config.php';
+    session_start();
 
-  $page = "school-signup";
-  $title = "School Sign Up";
+    $page = "school-signup";
+    $title = "School Sign Up";
 ?>
   <!-- include head tags -->
- <?php include("../includes/head.php"); ?>
+ <?php include("../includes/auth-head.php"); ?>
 <body>
   <main>
     <div class="container">
         <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
         <div class="container">
             <div class="row justify-content-center">
-            <div class="col-lg-6 col-md-6 d-flex flex-column align-items-center justify-content-center">
+            <div class="col-lg-6 d-flex flex-column align-items-center justify-content-center">
 
                 <div class="d-flex justify-content-center py-4">
                 <a href="index.html" class="logo d-flex align-items-center w-auto">
@@ -30,27 +31,18 @@ $config = require __DIR__ . '/../../config/config.php';
                     <p class="text-center small">Enter your personal details to create account</p>
                     </div>
 
-                    <form class="row g-3 needs-validation" novalidate>
+                    <form action="../actions/authentication.php" method="POST" class="row g-3 needs-validation" novalidate>
                     <!-- first name -->
                     <div class="col-md-6">
                         <label for="yourName" class="form-label">First Name</label>
-                        <input type="text" name="fName" class="form-control" id="fName" required>
+                        <input type="text" name="first_name" class="form-control" id="fName" required>
                         <div class="invalid-feedback">Please, enter your first name!</div>
                     </div>
                     <!-- last name -->
                     <div class="col-md-6">
                         <label for="yourName" class="form-label">Last Name</label>
-                        <input type="text" name="lName" class="form-control" id="lName" required>
+                        <input type="text" name="last_name" class="form-control" id="lName" required>
                         <div class="invalid-feedback">Please, enter your last name!</div>
-                    </div>
-                    <!-- username -->
-                    <div class="col-12">
-                        <label for="yourUsername" class="form-label">Username</label>
-                        <div class="input-group has-validation">
-                            <span class="input-group-text" id="inputGroupPrepend">@</span>
-                            <input type="text" name="username" class="form-control" id="yourUsername" required>
-                            <div class="invalid-feedback">Please choose a username.</div>
-                        </div>
                     </div>
                     <!-- email -->
                     <div class="col-md-7">
@@ -73,7 +65,7 @@ $config = require __DIR__ . '/../../config/config.php';
                     <!-- confirm password -->
                     <div class="col-md-6">
                         <label for="yourPassword" class="form-label">Confirm Password</label>
-                        <input type="password" name="cpassword" class="form-control" id="confirmPassword" required>
+                        <input type="password" name="confirmPassword" class="form-control" id="confirmPassword" required>
                         <div class="invalid-feedback">Please enter your password!</div>
                     </div>
                     <!-- aggreement -->
@@ -85,7 +77,7 @@ $config = require __DIR__ . '/../../config/config.php';
                         </div>
                     </div>
                     <div class="col-12">
-                        <button class="btn btn-primary w-100" type="submit">Create Account</button>
+                        <button class="btn btn-primary w-100" name="SignUp" type="submit">Create Account</button>
                     </div>
                     <div class="col-12">
                         <p class="small mb-0">Already have an account? <a href="./">Log In</a></p>
@@ -113,7 +105,7 @@ $config = require __DIR__ . '/../../config/config.php';
 
   
   <!-- include bottom tags and scrpts -->
- <?php include("../includes/head.php"); ?>
+ <?php include("../includes/auth-bottom.php"); ?>
 </body>
 
 </html>

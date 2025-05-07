@@ -5,7 +5,7 @@ $config = require __DIR__ . '/../../config/config.php';
   $title = "School Forget Password";
 ?>
   <!-- include head tags -->
- <?php include("../includes/head.php"); ?>
+ <?php include("../includes/auth-head.php"); ?>
 <body>
   <main>
     <div class="container">
@@ -74,7 +74,7 @@ $config = require __DIR__ . '/../../config/config.php';
 
   
   <!-- include bottom tags and scrpts -->
- <?php include("../includes/head.php"); ?>
+ <?php include("../includes/auth-bottom.php"); ?>
 </body>
 
 </html>
