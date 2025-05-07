@@ -1,11 +1,11 @@
 <?php
-$config = require __DIR__ . '/../../config/config.php';
-
+  $config = require __DIR__ . '/../config/config.php';
+  require_once '../middleware/auth.php';
   $page = "school-dashboard";
   $title = "School Dashboard";
 ?>
   <!-- include head tags -->
- <?php include("../includes/head.php"); ?>
+ <?php include("includes/head.php"); ?>
 <body>
 
   <!-- ======= Header ======= -->
@@ -166,14 +166,8 @@ $config = require __DIR__ . '/../../config/config.php';
   <?php include 'components/footer.php';?>
   <!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Vendor JS Files -->
-  <!-- <script src="assets/vendor/apexcharts/apexcharts.min.js"></script> -->
-  <script src="../assets/vendors/bootstrap-5.3.3/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="../assets/app/js/main.js"></script>
+  <!-- include bottom tags and scrpts -->
+  <?php include("includes/bottom.php"); ?>
 
 </body>
 
