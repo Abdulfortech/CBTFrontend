@@ -86,9 +86,9 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">
                 <i class="bi bi-box-arrow-right"></i>
-                <span>Log Out</span>
+                <span>Sign Out</span>
               </a>
             </li>
 
@@ -99,3 +99,24 @@
     </nav><!-- End Icons Navigation -->
 
   </header>
+
+  <!-- Logout Confirmation Modal -->
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content border-0 shadow">
+      <div class="modal-header">
+        <h5 class="modal-title" id="logoutModalLabel">Confirm Sign Out</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="actions/authentication.php" method="POST" method="POST">
+        <div class="modal-body">
+          Are you sure you want to sign out?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" name="SignOut" class="btn btn-danger">Sign Out</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
