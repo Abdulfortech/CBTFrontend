@@ -1,9 +1,58 @@
 <?php
 $config = require __DIR__ . '/../../config/config.php';
+$page = "school-signup";
+$title = "School Sign Up";
 
-  $page = "school-signup";
-  $title = "School Sign Up";
+// Database connection
+$pdo = new PDO($config['db_dsn'], $config['db_user'], $config['db_pass']);
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+// Handle form submission
+$errors = [];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $fName = trim($_POST['fName']);
+    $lName = trim($_POST['lName']);
+    $username = trim($_POST['username']);
+    $email = trim($_POST['email']);
+    $phone = trim($_POST['phone']);
+    $password = $_POST['password'];
+    $cpassword = $_POST['cpassword'];
+
+    // Basic validation
+    if ($password !== $cpassword) {
+        $errors[] = "Passwords do not match.";
+    }
+
+    // Check if username or email already exists
+    $stmt = $pdo->prepare("SELECT id FROM schools WHERE username = :username OR email = :email");
+    $stmt->execute(['username' => $username, 'email' => $email]);
+
+    if ($stmt->fetch()) {
+        $errors[] = "Username or email already exists.";
+    }
+
+    // If no errors, insert new record
+    if (empty($errors)) {
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+        $stmt = $pdo->prepare("INSERT INTO schools (first_name, last_name, username, email, phone, password, created_at) 
+                               VALUES (:fName, :lName, :username, :email, :phone, :password, NOW())");
+        $stmt->execute([
+            'fName' => $fName,
+            'lName' => $lName,
+            'username' => $username,
+            'email' => $email,
+            'phone' => $phone,
+            'password' => $hashedPassword
+        ]);
+
+        // success message
+        header("Location: ./?signup=success");
+        exit;
+    }
+}
 ?>
+
   <!-- include head tags -->
  <?php include("../includes/head.php"); ?>
 <body>
