@@ -1,14 +1,13 @@
 <?php
+// Load configuration and DB connection
 $config = require __DIR__ . '/../../config/config.php';
+require __DIR__ .'/../../config/connection.php';
+
 $page = "school-signup";
 $title = "School Sign Up";
 
-// Database connection
-$pdo = new PDO($config['db_dsn'], $config['db_user'], $config['db_pass']);
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-// Handle form submission
 $errors = [];
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fName = trim($_POST['fName']);
     $lName = trim($_POST['lName']);
@@ -18,12 +17,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
     $cpassword = $_POST['cpassword'];
 
-    // Basic validation
+    // Basic validations
+    if (empty($fName) || empty($lName) || empty($username) || empty($email) || empty($phone) || empty($password) || empty($cpassword)) {
+        $errors[] = "All fields are required.";
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Invalid email format.";
+    }
+
     if ($password !== $cpassword) {
         $errors[] = "Passwords do not match.";
     }
 
-    // Check if username or email already exists
+    // Check for existing user
     $stmt = $pdo->prepare("SELECT id FROM schools WHERE username = :username OR email = :email");
     $stmt->execute(['username' => $username, 'email' => $email]);
 
@@ -31,12 +38,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = "Username or email already exists.";
     }
 
-    // If no errors, insert new record
+    // Register new user if no errors
     if (empty($errors)) {
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-        $stmt = $pdo->prepare("INSERT INTO schools (first_name, last_name, username, email, phone, password, created_at) 
+        $stmt = $pdo->prepare("INSERT INTO schools (first_name, last_name, username, email, phone, password, created_at)
                                VALUES (:fName, :lName, :username, :email, :phone, :password, NOW())");
+
         $stmt->execute([
             'fName' => $fName,
             'lName' => $lName,
@@ -46,14 +54,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'password' => $hashedPassword
         ]);
 
-        // success message
         header("Location: ./?signup=success");
         exit;
     }
 }
 ?>
-
-  <!-- include head tags -->
+<!-- include head tags -->
  <?php include("../includes/head.php"); ?>
 <body>
   <main>
@@ -79,7 +85,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <p class="text-center small">Enter your personal details to create account</p>
                     </div>
 
-                    <form class="row g-3 needs-validation" novalidate>
+                    <?php if (!empty($errors)): ?>
+                     <div class="alert alert-danger">
+                      <ul>
+                        <?php foreach ($errors as $error): ?>
+                         <li><?= htmlspecialchars($error) ?></li>
+                        <?php endforeach; ?>
+                      </ul>
+                     </div>
+                    <?php endif; ?>
+
+                    <form class="row g-3 needs-validation" method="post" action="" novalidate>
                     <!-- first name -->
                     <div class="col-md-6">
                         <label for="yourName" class="form-label">First Name</label>

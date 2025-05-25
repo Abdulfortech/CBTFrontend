@@ -1,9 +1,34 @@
 <?php
 $config = require __DIR__ . '/../../config/config.php';
+require __DIR__ . '/../../config/connection.php';
 
   $page = "school-forget-password";
   $title = "School Forget Password";
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_POST['email'];
+
+    $stmt = $pdo->prepare("SELECT * FROM schools WHERE email = ?");
+    $stmt->execute([$email]);
+    $user = $stmt->fetch();
+
+    if ($user) {
+        $token = bin2hex(random_bytes(16));
+        $expiry = date("Y-m-d H:i:s", strtotime("+1 hour"));
+
+        $update = $pdo->prepare("UPDATE schools SET reset_token = ?, reset_token_expiry = ? WHERE email = ?");
+        $update->execute([$token, $expiry, $email]);
+
+        $resetLink = $config['app_url'] . "/auth/reset.php?token=$token";
+        $message = "Click to reset your password: <a href='$resetLink'>$resetLink</a>";
+
+        // Send with PHPMailer
+    }
+
+    echo "If this email is registered, a reset link has been sent.";
+}
 ?>
+
   <!-- include head tags -->
  <?php include("../includes/head.php"); ?>
 <body>

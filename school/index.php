@@ -1,11 +1,11 @@
 <?php
-$config = require __DIR__ . '/../../config/config.php';
+$config = require __DIR__ . '/school/../../config/config.php';
 
   $page = "school-dashboard";
   $title = "School Dashboard";
 ?>
   <!-- include head tags -->
- <?php include("../includes/head.php"); ?>
+ <?php include("school/../includes/head.php"); ?>
 <body>
 
   <!-- ======= Header ======= -->
